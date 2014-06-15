@@ -37,3 +37,6 @@ Icon
 
 *.suo
 YoutubeGetter/bin/Debug/Newtonsoft.Json.dll
+YoutubeGetter/bin/*
+YoutubeGetter/obj/*
+packages/*/*
