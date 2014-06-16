@@ -2,8 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Youtube Getter" Height="600" Width="960">
-    
+        Title="Youtube Getter" Height="600" Width="960"
+        ShowTitleBar="true"              
+        >
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="settings" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
     <Grid Margin="10,10,0,0" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -22,16 +29,16 @@
                      VerticalAlignment="Top" 
                      FontSize="18"></TextBox>
             <Button Grid.Column="1" Content="Get Video" 
-                    Margin="10,10,10,10" 
-                    Click="Button_Click"></Button>
+                    Margin="10,10,10,9.6" 
+                    Click="GetVideoButtonClick"/>
             <Button Grid.Column="2" 
                     Content="Get Audio" 
                     Margin="10,10,10,10" 
-                    Click="Button_Click"></Button>
+                    Click="GetAudioButtonClick"></Button>
         </Grid>
-        <Grid Row="1">
-                
-        </Grid>
-            
+        <DataGrid Grid.Row="1">
+
+        </DataGrid>
+
     </Grid>
 </controls:MetroWindow>

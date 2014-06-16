@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeGetter", "YoutubeGetter\YoutubeGetter.csproj", "{435EE054-7D14-4913-9B68-0A9579DE62A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeGetterTests", "YoutubeGetterTests\YoutubeGetterTests.csproj", "{F58FB4B7-8FE5-488B-9EF6-4E4D11053A81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{435EE054-7D14-4913-9B68-0A9579DE62A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{435EE054-7D14-4913-9B68-0A9579DE62A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{435EE054-7D14-4913-9B68-0A9579DE62A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58FB4B7-8FE5-488B-9EF6-4E4D11053A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58FB4B7-8FE5-488B-9EF6-4E4D11053A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58FB4B7-8FE5-488B-9EF6-4E4D11053A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58FB4B7-8FE5-488B-9EF6-4E4D11053A81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
