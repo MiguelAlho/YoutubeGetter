@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using YoutubeExtractor;
 using YoutubeGetter.Annotations;
 
 namespace YoutubeGetter.Models
@@ -25,6 +26,8 @@ namespace YoutubeGetter.Models
         public int AudioBitrate { get; set; }
         public string AudioFileExtension { get; set; }
 
+        public VideoInfo VideoDefinition { get; set; }
+
         public DownloadMediaModel(
             MediaType mediaType,
             string youtubeAddress,
@@ -34,7 +37,8 @@ namespace YoutubeGetter.Models
             string videoExtension,
             AudioFormat audioType,
             int bitrate,
-            string audioExtension
+            string audioExtension,
+            VideoInfo video
             )
         {
             MediaType = mediaType;
@@ -49,6 +53,8 @@ namespace YoutubeGetter.Models
             AudioFormat = audioType;
             AudioBitrate = bitrate;
             AudioFileExtension = audioExtension;
+
+            VideoDefinition = video;
         }
 
         

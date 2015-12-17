@@ -25,7 +25,10 @@ namespace YoutubeGetter
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        ObservableCollection<DownloadMediaModel> mediaList = new ObservableCollection<DownloadMediaModel>();
+        //ObservableCollection<DownloadMediaModel> mediaList = new ObservableCollection<DownloadMediaModel>();
+
+        public ObservableCollection<DownloadMediaModel> MediaList { get; private set; }
+
         string savepath = @"C:\Download\";
         
         public MainWindow()
@@ -33,7 +36,8 @@ namespace YoutubeGetter
             if (!Directory.Exists(savepath))
                 Directory.CreateDirectory(savepath);
 
-            this.DataContext = mediaList;
+            MediaList = new ObservableCollection<DownloadMediaModel>();
+            this.DataContext = MediaList;
         }
 
         private void GetVideoButtonClick(object formsender, RoutedEventArgs e)
@@ -52,7 +56,7 @@ namespace YoutubeGetter
              */
             VideoInfo video = videoInfos
                 .OrderByDescending(o => o.Resolution)
-                .FirstOrDefault(info => info.VideoType == VideoType.Mp4);
+                .FirstOrDefault(info => info.VideoType == VideoType.Mp4 && info.AudioType != AudioType.Unknown);
 
             //TODO: Null Check!!! use first or default, maybe
 
@@ -67,13 +71,51 @@ namespace YoutubeGetter
                     video.VideoExtension,
                     GetAudioFormat(video.AudioType),
                     video.AudioBitrate,
-                    video.AudioExtension
+                    video.AudioExtension,
+                    video
                     );
-                mediaList.Add(model);
+                MediaList.Add(model);
 
-                //DownloadVideo(video);
+                DownloadVideo(video);
             }
             
+        }
+        
+        private void GetAudioButtonClick(object formsender, RoutedEventArgs e)
+        {
+            // Our test youtube link
+            string link = YoutubeLink.Text;
+
+            /*
+             * Get the available video formats.
+             * We'll work with them in the video and audio download examples.
+             */
+            IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
+
+            /*
+             * We want the first extractable video with the highest audio quality.
+             */
+            VideoInfo video = videoInfos
+                .Where(info => info.CanExtractAudio)
+                .OrderByDescending(info => info.AudioBitrate)
+                .First();
+
+            DownloadMediaModel model = new DownloadMediaModel(
+                    MediaType.Audio,
+                    link,
+                    video.DownloadUrl,
+                    GetVideoFormat(video.VideoType),
+                    video.Resolution,
+                    video.VideoExtension,
+                    GetAudioFormat(video.AudioType),
+                    video.AudioBitrate,
+                    video.AudioExtension,
+                    video
+                    );
+            MediaList.Add(model);
+
+
+            DownloadAudio(video);
         }
 
         private AudioFormat GetAudioFormat(AudioType audioType)
@@ -126,28 +168,6 @@ namespace YoutubeGetter
              * For GUI applications note, that this method runs synchronously.
              */
             videoDownloader.Execute();
-        }
-
-        private void GetAudioButtonClick(object formsender, RoutedEventArgs e)
-        {
-            // Our test youtube link
-            string link = YoutubeLink.Text;
-
-            /*
-             * Get the available video formats.
-             * We'll work with them in the video and audio download examples.
-             */
-            IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
-
-            /*
-             * We want the first extractable video with the highest audio quality.
-             */
-            VideoInfo video = videoInfos
-                .Where(info => info.CanExtractAudio)
-                .OrderByDescending(info => info.AudioBitrate)
-                .First();
-
-            DownloadAudio(video);
         }
 
         private void DownloadAudio(VideoInfo video)
